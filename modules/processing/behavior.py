@@ -17,18 +17,14 @@ log = logging.getLogger(__name__)
 def fix_key(key):
     """ Fix a registry key to have it normalized
     """
-    res = key
-    if key.lower().startswith("registry\\machine\\"):
-        res = "HKEY_LOCAL_MACHINE\\" + key[17:]
-    elif key.lower().startswith("registry\\user\\"):
-        res = "HKEY_USERS\\" + key[14:]
-    elif key.lower().startswith("\\registry\\machine\\"):
-        res = "HKEY_LOCAL_MACHINE\\" + key[18:]
-    elif key.lower().startswith("\\registry\\user\\"):
-        res = "HKEY_USERS\\" + key[15:]
-
-    if not res.endswith("\\\\"):
-        res = res + "\\"
+    res = key.lower().lstrip("\\")
+    if lower_string.startswith("registry\\machine\\"):
+         res = "HKEY_LOCAL_MACHINE\\" + res[17:]
+    elif lower_string.startswith("registry\\user\\"):
+         res = "HKEY_USERS\\" + res[14:]
+                                     
+    if not res.endswith("\\\\"):     
+        res = res + "\\"             
     return res
 
 
