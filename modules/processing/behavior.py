@@ -18,10 +18,10 @@ def fix_key(key):
     """ Fix a registry key to have it normalized
     """
     res = key.lower().lstrip("\\")
-    if lower_string.startswith("registry\\machine\\"):
-         res = "HKEY_LOCAL_MACHINE\\" + res[17:]
-    elif lower_string.startswith("registry\\user\\"):
-         res = "HKEY_USERS\\" + res[14:]
+    if res.startswith("registry\\machine\\"):
+         res = "HKEY_LOCAL_MACHINE\\" + key.lstrip("\\")[17:]
+    elif res.startswith("registry\\user\\"):
+         res = "HKEY_USERS\\" + key.lstrip("\\")[14:]
                                      
     if not res.endswith("\\\\"):     
         res = res + "\\"             
